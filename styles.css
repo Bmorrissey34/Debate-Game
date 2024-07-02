@@ -14,8 +14,9 @@ body {
     align-items: center;
     height: 100vh;
     width: 100vw;
-    overflow: hidden;
+    overflow: auto; /* Allow scrolling */
     color: #333;
+    padding: 20px; /* Add padding to ensure content is not cut off */
 }
 
 #game {
@@ -23,10 +24,10 @@ body {
     padding: 40px;
     border-radius: 20px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-    width: 90%;
+    width: 100%;
     max-width: 900px;
-    max-height: 90vh; /* Ensuring the container is not too tall */
-    overflow-y: auto; /* Allowing vertical scrolling if needed */
+    max-height: 90vh; /* Ensure the container is not too tall */
+    overflow-y: auto; /* Allow vertical scrolling if needed */
     text-align: center;
     animation: fadeIn 1s ease-in-out;
 }
@@ -92,4 +93,17 @@ button:hover {
         opacity: 1;
         transform: translateY(0);
     }
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+#game::-webkit-scrollbar {
+    width: 8px;
+}
+
+#game::-webkit-scrollbar-thumb {
+    background-color: #0071e3;
+    border-radius: 4px;
 }
