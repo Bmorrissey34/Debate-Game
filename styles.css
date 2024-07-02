@@ -6,15 +6,15 @@
     box-sizing: border-box;
 }
 
-body {
+html, body {
     font-family: 'Roboto', sans-serif;
     background: linear-gradient(to right, #f8f9fa, #e9ecef);
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-    width: 100vw;
-    overflow: auto; /* Allow scrolling */
+    height: 100%;
+    width: 100%;
+    overflow: hidden; /* Prevent default body scrolling */
     color: #333;
     padding: 20px; /* Add padding to ensure content is not cut off */
 }
@@ -97,6 +97,7 @@ button:hover {
 
 html {
     scroll-behavior: smooth;
+    height: 100%;
 }
 
 #game::-webkit-scrollbar {
@@ -106,4 +107,14 @@ html {
 #game::-webkit-scrollbar-thumb {
     background-color: #0071e3;
     border-radius: 4px;
+}
+
+@supports (-webkit-touch-callout: none) {
+    html, body {
+        height: 100vh; /* Use 100vh for iOS Safari */
+    }
+
+    #game {
+        max-height: 80vh; /* Slightly adjust max-height for better fit on iOS Safari */
+    }
 }
