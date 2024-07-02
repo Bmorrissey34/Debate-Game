@@ -36,21 +36,38 @@ const scenarios = [
     }
 ];
 
+let availableScenarios = [...scenarios];
+const usedScenarios = new Set();
+
 document.addEventListener('DOMContentLoaded', () => {
     const generateButton = document.getElementById('generate-scenario');
     const currentScenario = document.getElementById('current-scenario');
     const currentQuestions = document.getElementById('current-questions');
 
     generateButton.addEventListener('click', () => {
-        const randomScenario = scenarios[Math.floor(Math.random() * scenarios.length)];
-        currentScenario.textContent = randomScenario.scenario;
+        if (availableScenarios.length === 0) {
+            alert("All scenarios have been shown. Resetting the list.");
+            availableScenarios = [...scenarios];
+            usedScenarios.clear();
+        }
 
+        const randomIndex = Math.floor(Math.random() * availableScenarios.length);
+        const randomScenario = availableScenarios[randomIndex];
+
+        currentScenario.textContent = randomScenario.scenario;
         currentQuestions.innerHTML = '';
+
         randomScenario.questions.forEach(question => {
             const li = document.createElement('li');
             li.textContent = question;
             currentQuestions.appendChild(li);
         });
+
+        usedScenarios.add(randomScenario);
+        availableScenarios = availableScenarios.filter(scenario => !usedScenarios.has(scenario));
     });
 });
+
+
+
 
